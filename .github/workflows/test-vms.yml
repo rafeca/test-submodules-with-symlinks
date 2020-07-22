@@ -13,11 +13,5 @@ jobs:
       - name: Check
         run: |
           git config --add core.symlinks false
-          echo "git diff"
-          git diff
-          echo "git diff --submodule=diff"
-          git diff --submodule=diff
 
-          cd gitignore
-          echo "git status on submodule"
-          git status
+          node test.js
