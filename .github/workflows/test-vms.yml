@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check
         run: |
-          git config --list
+          git config --add core.symlinks false
           echo "git diff"
           git diff
           echo "git diff --submodule=diff"
