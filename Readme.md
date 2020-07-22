@@ -1,3 +1,34 @@
+**Edit**: The issue seems to come from git for windows and it's related to the `core.symlinks` setting (which got recently enabled recently in GitHub Actions: https://github.com/actions/virtual-environments/pull/1186).
+
+I've been able to reproduce this same problem locally when using `-c core.symlinks=true` while cloning and updating the submodules of this repository:
+
+```sh
+$ git -c core.symlinks=true clone https://github.com/rafeca/test-submodules-with-symlinks.git && cd test-submodules-with-symlinks
+$ git -c core.symlinks=true submodule update --init --force --depth=1 --recursive
+$ git diff
+diff --git a/gitignore b/gitignore
+--- a/gitignore
++++ b/gitignore
+@@ -1 +1 @@
+-Subproject commit 218a941be92679ce67d0484547e3e142b2f5f6f0
++Subproject commit 218a941be92679ce67d0484547e3e142b2f5f6f0-dirty
+
+$ cd gitignore && git status
+HEAD detached at 218a941
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   Clojure.gitignore
+        modified:   Fortran.gitignore
+        modified:   Global/Octave.gitignore
+        modified:   Kotlin.gitignore
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+------
+
+
 This project contains a minimal reproduction of an issue that have appeared recently with the GitHub-hosted `windows-2019` VMs in GitHub Actions.
 
 In GitHub Actions, as can be seen in the [run results](https://github.com/rafeca/test-submodules-with-symlinks/runs/898580313#step:3:25) of this repository, after the `actions/checkout@v2` action finishes there are unintended local changes in the submodule.
