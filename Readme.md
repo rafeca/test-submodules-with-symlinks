@@ -28,6 +28,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 ------
 
+*(the information below outdated)*
 
 This project contains a minimal reproduction of an issue that have appeared recently with the GitHub-hosted `windows-2019` VMs in GitHub Actions.
 
