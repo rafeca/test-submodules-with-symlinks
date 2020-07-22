@@ -3,7 +3,7 @@ name: test-vms
 on:
   push:
     branches:
-      - '*'
+      - "*"
 
 jobs:
   build:
@@ -14,6 +14,7 @@ jobs:
           submodules: recursive
       - name: Check
         run: |
+          git submodule update -f --recursive
           echo "git diff"
           git diff
           echo "git diff --submodule=diff"
