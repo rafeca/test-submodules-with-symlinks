@@ -1,0 +1,25 @@
+name: test-vms
+
+on:
+  push:
+    branches:
+      - *
+
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Check
+        run: |
+          echo "git diff"
+          git diff
+          echo "git diff --submodule=diff"
+          git diff --submodule=diff
+
+          cd app/static/common/gitignore
+
+          echo "git status on submodule"
+          git status
