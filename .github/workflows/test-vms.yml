@@ -3,7 +3,7 @@ name: test-vms
 on:
   push:
     branches:
-      - *
+      - '*'
 
 jobs:
   build:
@@ -19,7 +19,6 @@ jobs:
           echo "git diff --submodule=diff"
           git diff --submodule=diff
 
-          cd app/static/common/gitignore
-
+          cd gitignore
           echo "git status on submodule"
           git status
